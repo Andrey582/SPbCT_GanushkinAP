@@ -118,13 +118,31 @@ namespace Practic {
 	public:
 		void FillData()
 		{
-			char* ch = new char[200];
+			int count = 0, i = 0, value, l = 0;
+			char* buffer = new char[300];
+			char* buffer2 = new char[3];
 			FILE* f = fopen("numbers.txt", "r");
+			fgets(buffer, 300, f);
 			dataGridView1->ColumnCount = 100;
-			for (int i = 0; i < 100; i++)
+			rewind(f);
+			while (!feof(f))
 			{
-				fread(ch, 2, 2, f);
-				dataGridView1->Rows[0]->Cells[i]->Value = ch;
+				if (buffer[count] == '\0')
+					break;
+				if (buffer[count] == 32)
+				{
+					i = 0;
+					value = std::atoi(buffer2);
+					dataGridView1->Rows[0]->Cells[l]->Value = value;
+					l++;
+					count++;
+					for (int j = 0; j < 3; j++)
+						buffer2[j] = '\0';
+					continue;
+				}
+				buffer2[i] = buffer[count];
+				count++;
+				i++;
 			}
 			fclose(f);
 		}

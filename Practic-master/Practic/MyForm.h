@@ -187,6 +187,7 @@ namespace Practic {
 		strftime(Current_date, 100, "%d.%m.%Y %H:%M:%S", date);
 		System::String^ strCLR = gcnew System::String(Current_date);
 		label2->Text += strCLR;
+		srand(time(0));
 		FILE* f = fopen("numbers.txt", "w");
 		for (int i = 0; i < 100; i++)
 		{
