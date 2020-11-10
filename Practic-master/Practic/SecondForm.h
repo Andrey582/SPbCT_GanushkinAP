@@ -4,6 +4,8 @@
 #include <iostream>
 using namespace std;
 
+
+
 namespace Practic {
 
 	using namespace System;
@@ -13,6 +15,32 @@ namespace Practic {
 	using namespace System::Data;
 	using namespace System::Drawing;
 
+	static int array[100];
+	static void SortData(int n)
+	{
+		int max, maxi = 0, j = n, temp, count;
+		for (n; n < 10 + j; n++)
+		{
+			count = 0;
+			max = array[n];
+			for (int i = n; i < 10 + j; i++)
+			{
+				if (array[i] > max)
+				{
+					max = array[i];
+					maxi = i;
+					count++;
+				}
+			}
+			if (count == 0)
+				continue;
+			temp = array[n];
+			array[n] = array[maxi];
+			array[maxi] = temp;
+		}
+
+	}
+	
 	/// <summary>
 	/// —водка дл€ MyForm1
 	/// </summary>
@@ -26,7 +54,7 @@ namespace Practic {
 			//TODO: добавьте код конструктора
 			//
 		}
-
+		
 	protected:
 		/// <summary>
 		/// ќсвободить все используемые ресурсы.
@@ -113,7 +141,9 @@ namespace Practic {
 			// 
 			// dataGridView2
 			// 
+			this->dataGridView2->AutoSizeColumnsMode = System::Windows::Forms::DataGridViewAutoSizeColumnsMode::AllCells;
 			this->dataGridView2->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->dataGridView2->ColumnHeadersVisible = false;
 			this->dataGridView2->Location = System::Drawing::Point(116, 136);
 			this->dataGridView2->Name = L"dataGridView2";
 			this->dataGridView2->Size = System::Drawing::Size(1036, 50);
@@ -187,7 +217,7 @@ namespace Practic {
 				{
 					i = 0;
 					value = std::atoi(buffer2);
-				//	array[l] = value;
+					array[l] = value;
 					dataGridView1->Rows[0]->Cells[l]->Value = value;
 					l++;
 					count++;
@@ -204,37 +234,15 @@ namespace Practic {
 			delete[] buffer2;
 		}
 
-		void SortData(int n)
-		{
-			int min;
-			for (n; n < 10; n++)
-			{
-				// ¬ переменной smallestIndex хранитс€ индекс наименьшего значени€, которое мы нашли в этой итерации.
-				// Ќачинаем с того, что наименьший элемент в этой итерации - это первый элемент (индекс 0)
-			//	min = array[n];
-
-				// «атем ищем элемент поменьше в остальной части массива
-				for (int i = n + 1; i < 10; i++)
-				{
-					// ≈сли мы нашли элемент, который меньше нашего наименьшего элемента,
-				//	if (array[i] < array[min])
-						// то запоминаем его
-						min = i;
-				}
-
-				// smallestIndex теперь наименьший элемент. 
-						// ћен€ем местами наше начальное наименьшее число с тем, которое мы обнаружили
-			//	std::swap(array[n], array[min]);
-			}
-			
-		}
 
 		void SortInFile()
 		{
 			FILE* f = fopen("numbers.txt", "w");
-			for (int i = 0; i < 50; i++)
+			dataGridView2->ColumnCount = 100;
+			for (int i = 0; i < 100; i++)
 			{
-			//	fprintf(f, "%d ", array[i]);
+				fprintf(f, "%d ", array[i]);
+				dataGridView2->Rows[0]->Cells[i]->Value = array[i];
 			}
 			fclose(f);
 		}
@@ -246,15 +254,20 @@ namespace Practic {
 
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 		
-		/*SortData(0);
-		SortData(10);
-		SortData(20);
-		SortData(30);
-		SortData(40);
-		SortInFile();*/
+		thread th1(SortData, 0);
+		thread th2(SortData, 10);
+		thread th3(SortData, 20);
+		thread th4(SortData, 30);
+		thread th5(SortData, 40);
+		th1.join();
+		th2.join();
+		th3.join();
+		th4.join();
+		th5.join();
+		SortInFile();
 
 	}
 };
 
-	
+
 }
