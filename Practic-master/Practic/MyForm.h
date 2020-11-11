@@ -130,7 +130,7 @@ namespace Practic {
 			this->label3->Text = L"Имя:";
 			// 
 			// label4
-			// 
+			// Ганюшкин Андрей
 			this->label4->AutoSize = true;
 			this->label4->Location = System::Drawing::Point(49, 81);
 			this->label4->Name = L"label4";
