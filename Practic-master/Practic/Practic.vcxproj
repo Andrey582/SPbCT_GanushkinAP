@@ -126,6 +126,7 @@
   <ItemGroup>
     <ClCompile Include="MyForm.cpp" />
     <ClCompile Include="SecondForm.cpp" />
+    <ClCompile Include="Vector\vector.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MyForm.h">
@@ -142,6 +143,9 @@
     <EmbeddedResource Include="SecondForm.resx">
       <DependentUpon>SecondForm.h</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Vector\Debug\Vector.dll" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

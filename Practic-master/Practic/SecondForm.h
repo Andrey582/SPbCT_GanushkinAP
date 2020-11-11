@@ -1,5 +1,5 @@
 #pragma once
-#include "vector.h"
+#include "Vector.h"
 #include <thread>
 #include <iostream>
 #include <vector>
@@ -137,6 +137,7 @@ namespace Practic {
 			this->dataGridView1->ColumnHeadersVisible = false;
 			this->dataGridView1->Location = System::Drawing::Point(116, 30);
 			this->dataGridView1->Name = L"dataGridView1";
+			this->dataGridView1->RowHeadersVisible = false;
 			this->dataGridView1->Size = System::Drawing::Size(1036, 47);
 			this->dataGridView1->TabIndex = 3;
 			// 
@@ -147,6 +148,7 @@ namespace Practic {
 			this->dataGridView2->ColumnHeadersVisible = false;
 			this->dataGridView2->Location = System::Drawing::Point(116, 136);
 			this->dataGridView2->Name = L"dataGridView2";
+			this->dataGridView2->RowHeadersVisible = false;
 			this->dataGridView2->Size = System::Drawing::Size(1036, 50);
 			this->dataGridView2->TabIndex = 4;
 			// 

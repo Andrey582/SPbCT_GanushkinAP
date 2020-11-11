@@ -4,7 +4,6 @@
 #include <cstdio>
 #include <ctime>
 #include "SecondForm.h"
-#include "vector.h"
 using namespace std;
 
 namespace Practic {
