@@ -120,7 +120,7 @@ namespace practic {
 			// 
 			// label3
 			// 
-			//Выполнил Ганюшкин Андрей
+			//
 			this->label3->AutoSize = true;
 			this->label3->Location = System::Drawing::Point(14, 32);
 			this->label3->Name = L"label3";
