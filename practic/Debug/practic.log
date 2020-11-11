@@ -1,0 +1,4 @@
+﻿  MyForm.cpp
+C:\Users\Андрей\controlwork\SPbCT_GanushkinAP\practic\MyForm.h(189,13): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+  MyForm.obj : обнаружен модуль MSIL; для MSIL последовательная компоновка отключена; выполняется полная компоновка
+  practic.vcxproj -> C:\Users\Андрей\controlwork\SPbCT_GanushkinAP\practic\Debug\practic.exe

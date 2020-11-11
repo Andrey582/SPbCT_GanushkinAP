@@ -1,45 +1,48 @@
-#ifndef VECTOR_H
+#pragma once
+#ifdef VECTOR_H
 #define VECTOR_H __declspec(dllexport)
 #else
 #define VECTOR_H __declspec(dllimport)
-#endif 
-#pragma once
-#include <stdexcept>
+#endif
+#include <iostream>
+#include <string>
+#include <cassert>
+#include <algorithm>
 
-template <typename T>
+using namespace std;
+
+template <class T>
 class Vector
 {
 public:
-	class Iterator
-	{
-	public:
-		Iterator(const Vector<T>* vector, int nIndex);
-		const T& operator*() const;
-		Iterator& operator++();
-		bool operator!=(const Iterator& other) const;
+        
+    typedef T* iterator;
 
-	private:
-		const Vector<T>* m_pVector;
-		int m_nIndex = -1;
-	};
+    Vector();
+    Vector(unsigned int size);
+    Vector(unsigned int size, const T& initial);
+    Vector(const Vector<T>& v);
+    ~Vector();
 
-public:
-	Vector() = default;
-	explicit Vector(int nSize);
+    unsigned int capacity() const;
+    unsigned int size() const;
+    bool empty() const;
+    iterator begin();
+    iterator end();
+    T& front();
+    T& back();
+    void push_back(const T& value);
+    void pop_back();
 
-	~Vector();
+    void reserve(unsigned int capacity);
+    void resize(unsigned int size);
 
-	void insert(const T& value);
-
-	int size() const;
-	const T& operator[](int nIndex) const;
-
-	Iterator begin() const;
-	Iterator end() const;
+    T& operator[](unsigned int index);
+    Vector<T>& operator=(const Vector<T>&);
 
 private:
-	T* m_pData = nullptr;
-	int m_nSize = 0;
-	int m_nCapacity = 0;
+    unsigned int my_size;
+    unsigned int my_capacity;
+    T* buffer;
 };
 

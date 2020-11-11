@@ -1,97 +1,138 @@
 #include "pch.h"
-#include "vector.h"
+#include "Vector.h"
 
 
-
-template <typename T>
-Vector<T>::Vector(int nCapacity)
+template<class T>
+Vector<T>::Vector()
 {
-	m_nCapacity = nCapacity;
-	m_pData = new T[m_nCapacity];
+    my_capacity = 0;
+    my_size = 0;
+    buffer = 0;
 }
 
-template <typename T>
+template<class T>
+Vector<T>::Vector(const Vector<T>& v)
+{
+    my_size = v.my_size;
+    my_capacity = v.my_capacity;
+    buffer = new T[my_size];
+    for (int i = 0; i < my_size; i++)
+        buffer[i] = v.buffer[i];
+}
+
+template<class T>
+Vector<T>::Vector(unsigned int size)
+{
+    my_capacity = size;
+    my_size = size;
+    buffer = new T[size];
+}
+
+template<class T>
+Vector<T>::Vector(unsigned int size, const T& initial)
+{
+    my_size - size;
+    my_capacity = size;
+    buffer = new T[size];
+    for (int i = 0; i < size; i++)
+        buffer[i] = initial;
+    T();
+}
+
+template<class T>
+Vector<T>& Vector<T>::operator = (const Vector<T>& v)
+{
+    delete[] buffer;
+    my_size = v.my_size;
+    my_capacity = v.my_capacity;
+    buffer = new T[my_size];
+    for (int i = 0; i < my_size; i++)
+        buffer[i] = v.buffer[i];
+    return *this;
+}
+
+template<class T>
+typename Vector<T>::iterator Vector<T>::begin()
+{
+    return buffer;
+}
+
+template<class T>
+typename Vector<T>::iterator Vector<T>::end()
+{
+    return buffer + size();
+}
+
+template<class T>
+T& Vector<T>::front()
+{
+    return buffer[0];
+}
+
+template<class T>
+T& Vector<T>::back()
+{
+    return buffer[size - 1];
+}
+
+template<class T>
+void Vector<T>::push_back(const T& v)
+{
+    if (my_size >= my_capacity)
+        reserve(my_capacity + 5);
+    buffer[my_size++] = v;
+}
+
+template<class T>
+void Vector<T>::pop_back()
+{
+    my_size--;
+}
+
+template<class T>
+void Vector<T>::reserve(unsigned int capacity)
+{
+    if (buffer == 0)
+    {
+        my_size = 0;
+        my_capacity = 0;
+    }
+    T* buffer = new T[capacity];
+    assert(buffer);
+    copy(buffer, buffer + my_size, buffer);
+    my_capacity = capacity;
+    delete[] buffer;
+    buffer = buffer;
+
+}
+
+template<class T>
+unsigned int Vector<T>::size()const
+{
+    return my_size;
+}
+
+template<class T>
+void Vector<T>::resize(unsigned int size)
+{
+    reserve(size);
+    size = size;
+}
+
+template<class T>
+T& Vector<T>::operator[](unsigned int index)
+{
+    return buffer[index];
+}
+
+template<class T>
+unsigned int Vector<T>::capacity()const
+{
+    return my_capacity;
+}
+
+template<class T>
 Vector<T>::~Vector()
 {
-	delete m_pData;
-	m_nSize = 0;
-	m_nCapacity = 0;
-}
-
-template <typename T>
-void Vector<T>::insert(const T& value)
-{
-	if (m_nSize == m_nCapacity)
-	{
-		if (m_nCapacity == 0)
-			m_nCapacity = 1;
-
-		m_nCapacity *= 2;
-
-
-		auto pNewMemory = new T[m_nCapacity];
-
-
-		for (auto idx = 0; idx < m_nSize; ++idx)
-			pNewMemory[idx] = m_pData[idx];
-
-		delete m_pData;
-		m_pData = pNewMemory;
-	}
-
-	m_pData[m_nSize] = value;
-	++m_nSize;
-}
-
-template <typename T>
-int Vector<T>::size() const
-{
-	return m_nSize;
-}
-
-template <typename T>
-const T& Vector<T>::operator[](int nIndex) const
-{
-	if (nIndex >= m_nSize)
-		throw std::exception("Index out of range");
-
-	return m_pData[nIndex];
-}
-
-template <typename T>
-typename Vector<T>::Iterator Vector<T>::begin() const
-{
-	return Vector<T>::Iterator{ this, 0 };
-}
-
-template <typename T>
-typename Vector<T>::Iterator Vector<T>::end() const
-{
-	return Vector<T>::Iterator{ this, m_nSize };
-}
-
-template <typename T>
-Vector<T>::Iterator::Iterator(const Vector<T>* pVector, int nIndex)
-	: m_pVector(pVector)
-	, m_nIndex(nIndex)
-{
-}
-
-template <typename T>
-const T& Vector<T>::Iterator::operator*() const
-{
-	return m_pVector->operator[](m_nIndex);
-}
-
-template <typename T>
-typename Vector<T>::Iterator& Vector<T>::Iterator::operator++()
-{
-	++m_nIndex;
-	return *this;
-}
-
-template <typename T>
-bool Vector<T>::Iterator::operator!=(const Vector<T>::Iterator& other) const
-{
-	return m_nIndex != other.m_nIndex;
+    delete[]buffer;
 }

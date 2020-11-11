@@ -1,0 +1,6 @@
+C:\Users\Андрей\controlwork\SPbCT_GanushkinAP\practic\Debug\practic.vcxprojAssemblyReference.cache
+C:\Users\Андрей\controlwork\SPbCT_GanushkinAP\practic\Debug\practic.exe
+C:\Users\Андрей\controlwork\SPbCT_GanushkinAP\practic\Debug\practic.pdb
+C:\Users\Андрей\controlwork\SPbCT_GanushkinAP\practic\Debug\practic.MyForm.resources
+C:\Users\Андрей\controlwork\SPbCT_GanushkinAP\practic\Debug\practic.vcxproj.GenerateResource.cache
+C:\Users\Андрей\controlwork\SPbCT_GanushkinAP\practic\Debug\practic.MyForm1.resources
