@@ -8,7 +8,6 @@
 using namespace std;
 
 namespace Practic {
-
 	using namespace System;
 	using namespace System::ComponentModel;
 	using namespace System::Collections;
@@ -104,6 +103,7 @@ namespace Practic {
 			this->textBox1->Name = L"textBox1";
 			this->textBox1->Size = System::Drawing::Size(100, 20);
 			this->textBox1->TabIndex = 2;
+			this->textBox1->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &MyForm::textBox1_KeyPress);
 			// 
 			// textBox2
 			// 
@@ -111,6 +111,7 @@ namespace Practic {
 			this->textBox2->Name = L"textBox2";
 			this->textBox2->Size = System::Drawing::Size(100, 20);
 			this->textBox2->TabIndex = 3;
+			this->textBox2->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &MyForm::textBox2_KeyPress);
 			// 
 			// textBox3
 			// 
@@ -118,6 +119,7 @@ namespace Practic {
 			this->textBox3->Name = L"textBox3";
 			this->textBox3->Size = System::Drawing::Size(100, 20);
 			this->textBox3->TabIndex = 4;
+			this->textBox3->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &MyForm::textBox3_KeyPress);
 			// 
 			// label3
 			// 
@@ -190,9 +192,7 @@ namespace Practic {
 		srand(time(0));
 		FILE* f = fopen("numbers.txt", "w");
 		for (int i = 0; i < 100; i++)
-		{
 			fprintf(f, "%d ", rand() % 19 - 9);
-		}
 		fclose(f);
 	}
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -204,5 +204,23 @@ namespace Practic {
 		form->ShowDialog();
 
 	}
+private: System::Void textBox1_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
+	if (Char::IsPunctuation(e->KeyChar) || Char::IsDigit(e->KeyChar) || Char::IsSymbol(e->KeyChar))
+		e->Handled = true;
+	if (Char::IsLetter(e->KeyChar))
+		return;
+}
+private: System::Void textBox2_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
+	if (Char::IsPunctuation(e->KeyChar) || Char::IsDigit(e->KeyChar) || Char::IsSymbol(e->KeyChar))
+		e->Handled = true;
+	if (Char::IsLetter(e->KeyChar))
+		return;
+}
+private: System::Void textBox3_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
+	if (Char::IsPunctuation(e->KeyChar) || Char::IsDigit(e->KeyChar) || Char::IsSymbol(e->KeyChar))
+		e->Handled = true;
+	if (Char::IsLetter(e->KeyChar))
+		return;
+}
 };
 }

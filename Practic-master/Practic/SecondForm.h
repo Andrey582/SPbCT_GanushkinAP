@@ -2,6 +2,7 @@
 #include "vector.h"
 #include <thread>
 #include <iostream>
+#include <vector>
 using namespace std;
 
 
@@ -202,6 +203,7 @@ namespace Practic {
 	public:
 		void FillData()
 		{
+			vector<int> v;
 			int count = 0, i = 0, value, l = 0;
 			char* buffer = new char[300];
 			char* buffer2 = new char[3];
@@ -218,7 +220,8 @@ namespace Practic {
 					i = 0;
 					value = std::atoi(buffer2);
 					array[l] = value;
-					dataGridView1->Rows[0]->Cells[l]->Value = value;
+					v.push_back(value);
+					dataGridView1->Rows[0]->Cells[l]->Value = v[l];
 					l++;
 					count++;
 					for (int j = 0; j < 3; j++)
@@ -265,7 +268,6 @@ namespace Practic {
 		th4.join();
 		th5.join();
 		SortInFile();
-
 	}
 };
 
