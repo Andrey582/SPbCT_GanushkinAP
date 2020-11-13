@@ -2,7 +2,7 @@
 #include <thread>
 #include <vector>
 #include <iostream>
-#include "Vector.h"
+#include "Vector/Vector.h"
 using namespace std;
 
 
@@ -20,7 +20,7 @@ namespace practic {
 	static void SortData(int n)
 	{
 		int max, maxi = 0, j = n, temp, count;
-		for (n; n < 10 + j; n++)
+		for (n; n < 10  + j; n++)
 		{
 			count = 0;
 			max = v[n];
@@ -209,44 +209,44 @@ namespace practic {
 		{
 			
 			int count = 0, i = 0, value, l = 0;
-			char* buffer = new char[300];
-			char* buffer2 = new char[3];
-			FILE* f = fopen("numbers.txt", "r");
-			fgets(buffer, 300, f);
-			dataGridView1->ColumnCount = 100;
-			rewind(f);
-			while (!feof(f))
+			char* buffer = new char[300];  //буфер для хранения массива цифр
+			char* buffer2 = new char[3];     //буфер для хранения текущей цифры
+			FILE* f = fopen("numbers.txt", "r");      // открывает файл numbers.txt для чтения
+			fgets(buffer, 300, f);            //записывает в буфер для хранения массива цифры из файла
+			dataGridView1->ColumnCount = 100;        //задаёт количество столбцов для dataGridView
+			rewind(f);         //перемещает каретку в начало файла
+			while (!feof(f))     //пока не конец файла
 			{
-				if (buffer[count] == '\0')
+				if (buffer[count] == '\0')             
 					break;
-				if (buffer[count] == 32)
+				if (buffer[count] == 32)   //если текущий символ пробел
 				{
 					i = 0;
-					value = std::atoi(buffer2);
-					v.push_back(value);
-					dataGridView1->Rows[0]->Cells[l]->Value = v[l];
-					l++;
-					count++;
-					for (int j = 0; j < 3; j++)
+					value = std::atoi(buffer2);     //перевод из символа в цифру
+					v.push_back(value);      //помещение цифры в вектор
+					dataGridView1->Rows[0]->Cells[l]->Value = v[l];       //помещение данной цифры в dataGridView
+					l++;   //счётчик цифры
+					count++;   //счётчик кол-ва символов перебранных в буфере
+					for (int j = 0; j < 3; j++)   //обнуление буфера 2
 						buffer2[j] = '\0';
 					continue;
 				}
-				buffer2[i] = buffer[count];
+				buffer2[i] = buffer[count];              //запись числа в буфер 2
 				count++;
 				i++;
 			}
-			fclose(f);
-			delete[] buffer;
-			delete[] buffer2;
+			fclose(f);    //закрытиен файла
+			delete[] buffer;  //удаление динамического массива
+			delete[] buffer2;   //удаление динамического массива
 		}
 
 		void SortInFile()
 		{
 			FILE* f = fopen("numbers.txt", "w");
-			dataGridView2->ColumnCount = 100;
+			dataGridView2->ColumnCount = 100;    //выделяет 100 столбцов 
 			for (int i = 0; i < 100; i++)
 			{
-				fprintf(f, "%d ", v[i]);
+				fprintf(f, "%d ", v[i]);   //запись в файл сортированного массива
 				dataGridView2->Rows[0]->Cells[i]->Value = v[i];
 			}
 			fclose(f);
@@ -264,7 +264,7 @@ namespace practic {
 		thread th8(SortData, 70);
 		thread th9(SortData, 80);
 		thread th10(SortData, 90);
-		th1.join();
+		th1.join();   //способ синхронизации
 		th2.join();
 		th3.join();
 		th4.join();

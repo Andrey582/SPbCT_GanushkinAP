@@ -38,9 +38,11 @@ Vector::Vector<T>::Vector(unsigned int size, const T& initial)
         buffer[i] = initial;
     T();
 }
+//конструкторы вектора   
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template<class T>
-Vector::Vector<T>& Vector::Vector<T>::operator = (const Vector<T>& v)
+Vector::Vector<T>& Vector::Vector<T>::operator = (const Vector<T>& v)   // перегрузка присваивания
 {
     delete[] buffer;
     my_size = v.my_size;
@@ -53,7 +55,7 @@ Vector::Vector<T>& Vector::Vector<T>::operator = (const Vector<T>& v)
 
 
 template<class T>
-void Vector::Vector<T>::push_back(const T& v)
+void Vector::Vector<T>::push_back(const T& v)               //метод записи в вектор
 {
    if (my_size >= my_capacity)
        reserve(my_capacity + 5);
@@ -62,14 +64,14 @@ void Vector::Vector<T>::push_back(const T& v)
 
 
 template<class T>
-T& Vector::Vector<T>::operator[](unsigned int index)
+T& Vector::Vector<T>::operator[](unsigned int index)            // перегрузка вызова по индексу
 {
     return buffer[index];
 }
 
 
 template<class T>
-Vector::Vector<T>::~Vector()
+Vector::Vector<T>::~Vector()            //деструктор
 {
     delete[] buffer;
 }

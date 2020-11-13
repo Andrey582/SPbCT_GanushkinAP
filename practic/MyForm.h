@@ -184,16 +184,16 @@ namespace practic {
 		const time_t timer = time(NULL);
 		date = localtime(&timer);
 		strftime(Current_date, 100, "%d.%m.%Y %H:%M:%S", date);
-		System::String^ strCLR = gcnew System::String(Current_date);
+		System::String^ strCLR = gcnew System::String(Current_date);     //выводит время и дату запуска программы
 		label2->Text += strCLR;
 		srand(time(0));
-		FILE* f = fopen("numbers.txt", "w");
+		FILE* f = fopen("numbers.txt", "w");	//создаёт txt файл и заполняет его цифрами от -9 до 9
 		for (int i = 0; i < 100; i++)
 			fprintf(f, "%d ", rand() % 19 - 9);
 		fclose(f);
 	}
 	private: System::Void textBox1_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
-		if (Char::IsPunctuation(e->KeyChar) || Char::IsDigit(e->KeyChar) || Char::IsSymbol(e->KeyChar))
+		if (Char::IsPunctuation(e->KeyChar) || Char::IsDigit(e->KeyChar) || Char::IsSymbol(e->KeyChar))        //запрещает ввод любых символов,кроме букв
 			e->Handled = true;
 		if (Char::IsLetter(e->KeyChar))
 			return;
@@ -211,12 +211,12 @@ namespace practic {
 			return;
 }
 private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
-	MyForm1^ form = gcnew MyForm1;
+	MyForm1^ form = gcnew MyForm1;       //создаёт новую форму
 	form->label1->Text = textBox1->Text;
 	form->label2->Text = textBox2->Text;
 	form->label3->Text = textBox3->Text;
-	form->FillData();
-	form->ShowDialog();
+	form->FillData();	//выводит  на экран массив цифр, записанных в файл
+	form->ShowDialog();           //выводит новую форму
 }
 };
 }
